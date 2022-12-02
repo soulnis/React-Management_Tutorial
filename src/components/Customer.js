@@ -1,12 +1,20 @@
 import React from 'react';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 
 
 class Customer extends React.Component {
     render () {
-       return(<div>
-                  <CustomerProfile id={this.props.id} name={this.props.name} image={this.props.image}/>
-                  <CustomerInfo  job={this.props.id} name={this.props.name} gender={this.props.gender}  birthday={this.props.birthday} job ={ this.props.job} />
-             </div>)
+       return(
+                 <TableRow>
+                    <TableCell>{this.props.id}</TableCell>
+                    <TableCell>{this.props.image}</TableCell>
+                    <TableCell> {this.props.name}</TableCell>
+                    <TableCell>{this.props.gender}</TableCell>
+                    <TableCell>{this.props.birthday}</TableCell>
+                    <TableCell>{this.props.job}</TableCell>
+                 </TableRow>
+             )
     }
 }
 
