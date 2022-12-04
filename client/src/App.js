@@ -12,6 +12,7 @@ import { withStyles} from '@mui/material/styles'
 import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { ClassNames } from '@emotion/react';
+import CustomerAdd from './components/CustomerAdd.js';
 
 
 const styles = theme =>({
@@ -69,6 +70,7 @@ class App extends React.Component {
 render () {
   let classNames = this.props.styles
   return (
+    <div>
     <Paper> 
       <Table>
          <TableHead>
@@ -94,6 +96,8 @@ render () {
        <Customer id= {customer[1].id} image = {customer[1].image} name={customer[1].name} birthday={customer[1].birthday} gender={customer[1].gender} job={customer[1].job} />
        <Customer id= {customer[2].id} image = {customer[2].image} name={customer[2].name} birthday={customer[2].birthday} gender={customer[2].gender} job={customer[2].job} /> */}
     </Paper>
+    <CustomerAdd/>
+    </div>
   );
   }
 }
