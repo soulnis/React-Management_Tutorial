@@ -8,34 +8,68 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import { withStyles } from '@mui/material/styles';
+import { withStyles} from '@mui/material/styles'
+import { CircularProgress } from '@mui/material';
+import React from 'react';
+import { ClassNames } from '@emotion/react';
 
 
+const styles = theme =>({
+  root:{
+     width : '100%' ,
+     marginTop : theme.spacing.unit * 3,
+     overflowX : "auto"
+  },
+  table:{
+    minwidth : 1080
+  },
+  progress:{
+    margin : theme.spacing.unit * 2
+  }
+})
 
+class App extends React.Component {
 
-function App() {
+  // 1.constructor()
+  // 2.componentWillMount
+  // 3.render
+  // 4.componentDidMount
 
-
-  let customer = [{ id:"1", image : "https://placeimg.com/64/64/1" ,name : "홍길덩",birthday : "20221202",gender : "남자",job : "소도둑놈"},
-  {id:"2", image : "https://placeimg.com/64/64/2" ,name : "힘길덩",birthday : "20211202",gender : "남자",job : "소도둑놈2"},
-  {id:"3", image : "https://placeimg.com/64/64/3" ,name : "김길덩",birthday : "20201202",gender : "여자",job : "소도둑놈3"} ]
-
-
-  const styles = theme => ({
-    root : {
-       width : '100%',
-       marginTop : theme.spacing.unit * 3,
-       overflowX : "auto"
-    },
+  // prps or stats 가 변경되면 shouldcompent
   
-    table : {
-      minWidth : 1080
-    }
-  })
-  
 
+
+  state = {
+    customer : '',
+    completed : 0
+  }
+
+  
+  componentDidMount() {
+    this.timer = setInterval(this.progress , 20)
+    this.CallApi().then( res=>  this.setState({customer:res} ) )
+    .catch(err => console.log(err))
+   
+  }
+  
+  progress = () => {
+    const {completed} = this.state;
+    this.setState({completed : completed >= 100 ? 0 :completed +1})
+  }
+
+  CallApi = async () => {
+
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
+ }
+
+
+  
+render () {
+  let classNames = this.props.styles
   return (
-    <Paper className = {styles.root}> 
+    <Paper> 
       <Table>
          <TableHead>
              <TableRow>
@@ -49,7 +83,8 @@ function App() {
 
          </TableHead>
          <TableBody>
-            { customer.map(c => { return (<Customer key={c.id} id= {c.id} image = {c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}/>) }) }
+            { this.state.customer ? this.state.customer.map(c => { return (<Customer key={c.id} id= {c.id} image = {c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}/>) }) 
+            : ''}
          </TableBody>
     
 
@@ -60,6 +95,7 @@ function App() {
        <Customer id= {customer[2].id} image = {customer[2].image} name={customer[2].name} birthday={customer[2].birthday} gender={customer[2].gender} job={customer[2].job} /> */}
     </Paper>
   );
+  }
 }
 
 export default App;
