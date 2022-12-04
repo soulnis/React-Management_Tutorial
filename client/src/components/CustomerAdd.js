@@ -21,6 +21,7 @@ class CustomerAdd extends React.Component {
         e.preventDefault();
         this.addCustmoer().then((response)=>{
             console.log(response.data)
+            this.props.stateRefresh();
         })
 
         this.setState({
@@ -32,7 +33,8 @@ class CustomerAdd extends React.Component {
             fileName : ''
 
         })
-
+        
+     
         //window.location.reload();
 
 

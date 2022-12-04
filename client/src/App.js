@@ -39,11 +39,27 @@ class App extends React.Component {
   // prps or stats 가 변경되면 shouldcompent
   
 
-
-  state = {
-    customer : '',
-    completed : 0
+  constructor(props){
+    super(props);
+    this.state = {
+      customer : '',
+      completed : 0
+    }
   }
+
+
+  stateRefresh = () =>{
+     this.setState( {
+      customer : '',
+      completed : 0
+    })
+
+    this.CallApi().then( res=>  this.setState({customer:res} ) )
+    .catch(err => console.log(err))
+
+  }
+
+ 
 
   
   componentDidMount() {
@@ -96,7 +112,7 @@ render () {
        <Customer id= {customer[1].id} image = {customer[1].image} name={customer[1].name} birthday={customer[1].birthday} gender={customer[1].gender} job={customer[1].job} />
        <Customer id= {customer[2].id} image = {customer[2].image} name={customer[2].name} birthday={customer[2].birthday} gender={customer[2].gender} job={customer[2].job} /> */}
     </Paper>
-    <CustomerAdd/>
+    <CustomerAdd stateRefresh={this.stateRefresh}/>
     </div>
   );
   }
