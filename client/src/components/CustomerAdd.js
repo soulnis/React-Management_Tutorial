@@ -21,6 +21,7 @@ class CustomerAdd extends React.Component {
         e.preventDefault();
         this.addCustmoer().then((response)=>{
             console.log(response.data)
+            //상위 컴포넌트로부터 이벤트를 통해서 상위 스테이트를 리프레쉬한다.
             this.props.stateRefresh();
         })
 

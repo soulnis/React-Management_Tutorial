@@ -13,6 +13,7 @@ import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { ClassNames } from '@emotion/react';
 import CustomerAdd from './components/CustomerAdd.js';
+import CustomerDelete from './components/CustomerDelete.js';
 
 
 const styles = theme =>({
@@ -97,11 +98,12 @@ render () {
                 <TableCell>생년월일</TableCell>
                 <TableCell>성별</TableCell>
                 <TableCell>직업</TableCell>
+                <TableCell>설정</TableCell>
              </TableRow>
 
          </TableHead>
          <TableBody>
-            { this.state.customer ? this.state.customer.map(c => { return (<Customer key={c.id} id= {c.id} image = {c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}/>) }) 
+            { this.state.customer ? this.state.customer.map(c => { return (<Customer stateRefresh={this.stateRefresh} key={c.id} id= {c.id} image = {c.image} name={c.name} birthday={c.birthday} gender={c.gender} job={c.job}/>) }) 
             : ''}
          </TableBody>
     
